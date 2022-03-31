@@ -4,7 +4,7 @@
 This password generator app allows users to select the features that they want in a password: length, upper and lower case, or numbers. After going through all the prompts, a password is generated and displayed to the page.
 
 ## Screenshot
-
+![Screenshot](screenshot.png)
 
 
 ## Link 
