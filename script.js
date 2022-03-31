@@ -1,71 +1,38 @@
-// Assignment Code
-var generateBtn = document.querySelector("#generate");
+var passwordBox = document.querySelector("#password");
 
+// arrays of password options 
 var lowercaseOptions = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-
 var uppercaseOptions = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
-
 var numericOptions = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-
 var specialOptions = ["!", "@", "#", "%", "^","&", "*", "(", ")", "+", "-", "{", "}", ":"];
 
+var promptMe = () => {
+  var desiredLength = window.prompt('Enter desired length (between 8 - 128 characters'); 
+  var lowerCase = window.prompt('Would you like to include lowercase letters? (yes or no)');
+  var upperCase = window.prompt('Would you like to include uppercase letters? (yes or no)');
+  var numeric = window.prompt('Would you like to include numbers? (yes or no)');
+  var special = window.prompt('Would you like to include special characters? (yes or no)');
 
-
-// Write password to the #password input
-function writePassword() {  
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-  passwordText.value = password;
-}
-
-
-
-  // I created these "if" statements, which will determine what goes inside the emptybasket, based on what the user selects:
-
-function generatePassword() {
-  var desiredLength = window.prompt ("Enter desired length (between 8 - 128 characters)");
-  var lowercase = window.confirm ("Would you like to include lowercase?");
-  var uppercase = window.confirm ("Would you like to include uppercase?");
-  var numeric = window.confirm ("Would you like to include numeric?");
-  var special = window.confirm ("Would you like to include special characters?");
-
-  var emptyBasket = [ ];
-
-  if (lowercase === true) {
-    emptyBasket = lowercaseOptions + emptyBasket 
+  var newOptions = []
+  var newPassword = '';
+  
+  if(lowerCase == 'yes' ) {
+    newOptions = newOptions.concat(lowercaseOptions);
   } 
-
-  if (uppercase === true) {
-    emptyBasket = uppercaseOptions + emptyBasket 
+  if(upperCase == 'yes') {
+    newOptions = newOptions.concat(uppercaseOptions);
+  }
+  if(numeric == 'yes') {
+    newOptions = newOptions.concat(numericOptions);
+  }
+  if(special == 'yes') {
+    newOptions = newOptions.concat(specialOptions);
   }
 
-  if (numeric === true) {
-    emptyBasket = numericOptions + emptyBasket 
+  for (let i = 0; i < desiredLength; i++) {
+    arrayLength = newOptions.length
+    var randomNumber = Math.floor(Math.random() * arrayLength);
+    var newPassword = newPassword + newOptions[randomNumber];
+    passwordBox.textContent = newPassword;
   }
-
-  if (special === true) {
-    emptyBasket = specialOptions + emptyBasket
-  }
-
-
-  // here's my "for" loop that selects characters randomly from my emptybasket:
-
-  for (var i = 0; i < desiredLength; i++) {
-    var randomNumb = Math.floor(Math.random() * emptyBasket.length);
-
-    randomChar = emptyBasket[randomNumb];
-
-    password = password + randomChar;
-  }
-
- return password
 }
-
-
-
-
-
-
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
